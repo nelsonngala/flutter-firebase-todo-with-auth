@@ -31,166 +31,168 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Utils.bgColor,
-        body: Center(
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 15),
-                  child: Text(
-                    'Sign Up',
-                    style: GoogleFonts.rubik(
-                        color: Utils.titleColor,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+        body: Form(
+          key: formKey,
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 50,
                   ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 15.0, right: 25.0),
-                  child: TextFormField(
-                    controller: _emailController,
-                    validator: (email) =>
-                        email != null && !EmailValidator.validate(email)
-                            ? 'Enter a valid email'
-                            : null,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                      hintText: 'Email',
-                      hintStyle: GoogleFonts.montserrat(),
-                      prefixIcon: Icon(
-                        Icons.email,
-                        color: Utils.labelColor,
+                  Container(
+                    margin: const EdgeInsets.only(left: 15),
+                    child: Text(
+                      'Sign Up',
+                      style: GoogleFonts.rubik(
+                          color: Utils.titleColor,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 15.0, right: 25.0),
+                    child: TextFormField(
+                      controller: _emailController,
+                      validator: (email) =>
+                          email != null && !EmailValidator.validate(email)
+                              ? 'Enter a valid email'
+                              : null,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        hintStyle: GoogleFonts.montserrat(),
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Utils.labelColor,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 15.0, right: 25.0),
-                  child: TextFormField(
-                    obscureText: true,
-                    controller: _passwordController,
-                    validator: (password) =>
-                        password != null && password.length < 6
-                            ? 'Password should be greater than 6 characters'
-                            : null,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      hintStyle: GoogleFonts.montserrat(),
-                      prefixIcon: Icon(
-                        Icons.lock_rounded,
-                        color: Utils.labelColor,
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 15.0, right: 25.0),
+                    child: TextFormField(
+                      obscureText: true,
+                      controller: _passwordController,
+                      validator: (password) =>
+                          password != null && password.length < 6
+                              ? 'Password should be greater than 6 characters'
+                              : null,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle: GoogleFonts.montserrat(),
+                        prefixIcon: Icon(
+                          Icons.lock_rounded,
+                          color: Utils.labelColor,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                // const SizedBox(
-                //   height: 10.0,
-                // ),
+                  // const SizedBox(
+                  //   height: 10.0,
+                  // ),
 
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  child: ElevatedButton(
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Utils.btnColor),
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            BlocProvider.of<AuthBloc>(context).add(SignUpEvent(
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim()));
+                          }
+                          return;
+                        },
+                        child: Text(
+                          'Sign Up',
+                          style: GoogleFonts.lato(fontSize: 20),
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 2, top: 2.0),
+                    child: const Text(
+                      'or',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 25, right: 25),
+                    child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Utils.btnColor),
+                        backgroundColor: Utils.googleBtnColor,
+                      ),
                       onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          BlocProvider.of<AuthBloc>(context).add(SignUpEvent(
-                              email: _emailController.text.trim(),
-                              password: _passwordController.text.trim()));
-                        }
-                        return;
+                        BlocProvider.of<AuthBloc>(context)
+                            .add(SignInWithGoogleEvent());
                       },
-                      child: Text(
-                        'Sign Up',
-                        style: GoogleFonts.lato(fontSize: 20),
-                      )),
-                ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 2, top: 2.0),
-                  child: const Text(
-                    'or',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 25, right: 25),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Utils.googleBtnColor,
-                    ),
-                    onPressed: () {
-                      BlocProvider.of<AuthBloc>(context)
-                          .add(SignInWithGoogleEvent());
-                    },
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 25,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            child: Image.network(
-                              'http://pngimg.com/uploads/google/google_PNG19635.png',
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 25,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              child: Image.network(
+                                'http://pngimg.com/uploads/google/google_PNG19635.png',
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Sign up with Google',
-                            style: GoogleFonts.lato(color: Utils.titleColor),
-                          )
-                        ],
+                            Text(
+                              'Sign up with Google',
+                              style: GoogleFonts.lato(color: Utils.titleColor),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Already have an account?',
-                        style: GoogleFonts.lato(fontSize: 18),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: ((context) =>
-                                        const LoginScreen())));
-                          },
-                          child: Text(
-                            'Login',
-                            style: GoogleFonts.lato(
-                                decoration: TextDecoration.underline,
-                                fontSize: 20),
-                          ))
-                    ],
-                  ),
-                )
-              ],
+                  SizedBox(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Already have an account?',
+                          style: GoogleFonts.lato(fontSize: 18),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const LoginScreen())));
+                            },
+                            child: Text(
+                              'Login',
+                              style: GoogleFonts.lato(
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 20),
+                            ))
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -118,6 +118,9 @@ class _UpdateTodoScreenState extends State<UpdateTodoScreen> {
               child: TextField(
                 controller: todoController,
                 style: textStyle(context),
+                decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey))),
               )),
           const SizedBox(
             height: 5.0,
@@ -133,7 +136,9 @@ class _UpdateTodoScreenState extends State<UpdateTodoScreen> {
                 readOnly: true,
                 style: textStyle(context),
                 decoration: const InputDecoration(
-                    suffixIcon: Icon(Icons.calendar_month_rounded)),
+                    suffixIcon: Icon(Icons.calendar_month_rounded),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey))),
                 onTap: () async {
                   DateTime? updatedDate = await showdatePicker();
                   if (updatedDate != null) {
@@ -166,7 +171,9 @@ class _UpdateTodoScreenState extends State<UpdateTodoScreen> {
                 controller: timeController,
                 style: textStyle(context),
                 decoration: const InputDecoration(
-                    suffixIcon: Icon(Icons.watch_later_outlined)),
+                    suffixIcon: Icon(Icons.watch_later_outlined),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey))),
                 onTap: () async {
                   DateTime? timeOfDay = await showtimePicker();
                   if (timeOfDay != null) {

@@ -7,6 +7,7 @@ final appThemeData = {
   AppTheme.lightTheme: ThemeData(
       // brightness: Brightness.light,
       // textTheme: Theme.,
+      // hintColor: Colors.grey,
       primaryColor: Utils.titleColor,
       unselectedWidgetColor: Colors.deepPurple,
       //odd color
@@ -15,6 +16,7 @@ final appThemeData = {
       backgroundColor: Utils.bgColor),
   AppTheme.darkTheme: ThemeData(
       //  brightness: Brightness.dark,
+      //  hintColor: Colors.grey,
       primaryColor: const Color(0xFFC5B2B8),
       unselectedWidgetColor: Colors.deepPurple,
       cardColor: const Color(0xFF0B525B),

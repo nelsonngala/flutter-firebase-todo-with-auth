@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
               );
             }
             if (state is AuthenticationError) {
-              return const Center(child: LoginWidget());
+              return const LoginWidget();
             }
 
             return Container();

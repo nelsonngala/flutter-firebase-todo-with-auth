@@ -34,10 +34,10 @@ class _LoginWidgetState extends State<LoginWidget> {
       child: Center(
         child: Scaffold(
           backgroundColor: Utils.bgColor,
-          body: Column(
-            children: [
-              Form(
-                key: formKey,
+          body: Form(
+            key: formKey,
+            child: Center(
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -217,7 +217,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),
