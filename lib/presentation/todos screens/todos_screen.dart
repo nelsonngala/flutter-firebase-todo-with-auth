@@ -7,6 +7,7 @@ import 'package:flutter_firebase_todo/presentation/todos%20screens/todo%20widget
 import 'package:flutter_firebase_todo/presentation/todos%20screens/todo%20widgets/todos_empty.dart';
 import 'package:flutter_firebase_todo/presentation/todos%20screens/todo%20widgets/todos_error.dart';
 import 'package:flutter_firebase_todo/presentation/todos%20screens/todo%20widgets/todos_loading.dart';
+import 'package:flutter_firebase_todo/presentation/utils/app_localization.dart';
 import 'package:flutter_firebase_todo/presentation/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -43,12 +44,13 @@ class TodosScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 40,
-                    width: double.infinity,
+                    //  width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     child: TabBar(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 5, right: 5),
                         indicatorPadding:
-                            const EdgeInsets.only(left: 15, right: 15),
-                        isScrollable: true,
+                            const EdgeInsets.only(left: 5, right: 5),
+                        //  isScrollable: true,
                         labelColor: const Color(0xff1d6983),
                         unselectedLabelColor: Colors.grey,
                         indicatorColor: const Color.fromARGB(255, 17, 15, 13),
@@ -57,15 +59,15 @@ class TodosScreen extends StatelessWidget {
                             fontSize: 18,
                             color: const Color(0xff0d1b21),
                             fontWeight: FontWeight.bold),
-                        tabs: const [
+                        tabs: [
                           Tab(
-                            text: 'Today',
+                            text: 'today'.tr(context),
                           ),
                           Tab(
-                            text: 'Pending',
+                            text: 'pending'.tr(context),
                           ),
                           Tab(
-                            text: 'Completed',
+                            text: 'done'.tr(context),
                           )
                         ]),
                   ),
